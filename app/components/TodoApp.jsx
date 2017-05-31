@@ -51,11 +51,12 @@ export default class TodoApp extends React.Component{
     }
 
     render(){
-        const {todos} = this.state;
+        const {todos, showCompleted, searchText} = this.state;
+        const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
         return(
             <div>
                 <TodoSearch onSearch={(e,f)=>this.handleSearch(e,f)}/>
-                <TodoList todos={todos} onToggle={(e)=>this.handleToggle(e)}/>
+                <TodoList todos={filteredTodos} onToggle={(e)=>this.handleToggle(e)}/>
                 <AddTodo onAddTodo={(e)=>this.handleAddTodo(e)}/>
             </div>
         )
