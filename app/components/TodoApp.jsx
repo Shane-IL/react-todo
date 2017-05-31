@@ -13,19 +13,23 @@ export default class TodoApp extends React.Component{
             todos: [
                 {
                     id: UUID(),
-                    text: 'Walk the dinosaur'
+                    text: 'Walk the dinosaur',
+                    completed: false
                 },
                 {
                     id: UUID(),
-                    text: 'Clean the spaceship'
+                    text: 'Clean the spaceship',
+                    completed: false
                 },
                 {
                     id: UUID(),
-                    text: 'Drink whisky'
+                    text: 'Drink whisky',
+                    completed: false
                 },
                 {
                     id: UUID(),
-                    text: 'Nap'
+                    text: 'Nap',
+                    completed: false
                 }
             ]
         };
@@ -37,7 +41,8 @@ export default class TodoApp extends React.Component{
                 ...this.state.todos,
                 {
                     id: UUID(),
-                    text: todoText
+                    text: todoText,
+                    completed: false
                 }
             ]
         })
@@ -50,12 +55,23 @@ export default class TodoApp extends React.Component{
         })
     }
 
+    handleToggle(id){
+        const updatedTodos = this.state.todos.map((todo)=>{
+            if(todo.id === id){
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+
+        this.setState({todos: updatedTodos});
+    }
+
     render(){
         const {todos} = this.state;
         return(
             <div>
                 <TodoSearch onSearch={(e,f)=>this.handleSearch(e,f)}/>
-                <TodoList todos={todos}/>
+                <TodoList todos={todos} onToggle={(e)=>this.handleToggle(e)}/>
                 <AddTodo onAddTodo={(e)=>this.handleAddTodo(e)}/>
             </div>
         )
