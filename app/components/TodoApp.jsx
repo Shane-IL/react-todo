@@ -1,5 +1,6 @@
 import React from 'react';
 import UUID from 'node-uuid';
+import TodoAPI from 'TodoAPI';
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
@@ -10,29 +11,12 @@ export default class TodoApp extends React.Component{
         this.state = {
             showCompleted: false,
             searchText: '',
-            todos: [
-                {
-                    id: UUID(),
-                    text: 'Walk the dinosaur',
-                    completed: false
-                },
-                {
-                    id: UUID(),
-                    text: 'Clean the spaceship',
-                    completed: false
-                },
-                {
-                    id: UUID(),
-                    text: 'Drink whisky',
-                    completed: false
-                },
-                {
-                    id: UUID(),
-                    text: 'Nap',
-                    completed: false
-                }
-            ]
+            todos: TodoAPI.getTodos()
         };
+    }
+
+    componentDidUpdate(){
+        TodoAPI.setTodos(this.state.todos);
     }
 
     handleAddTodo(todoText){
