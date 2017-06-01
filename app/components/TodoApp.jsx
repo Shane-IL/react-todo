@@ -1,5 +1,6 @@
 import React from 'react';
 import UUID from 'node-uuid';
+import moment from 'moment';
 import TodoAPI from 'TodoAPI';
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
@@ -11,7 +12,7 @@ export default class TodoApp extends React.Component{
         this.state = {
             showCompleted: false,
             searchText: '',
-            todos: TodoAPI.getTodos()
+            todos: TodoAPI.getTodos(),
         };
     }
 
@@ -26,7 +27,9 @@ export default class TodoApp extends React.Component{
                 {
                     id: UUID(),
                     text: todoText,
-                    completed: false
+                    completed: false,
+                    createdAt: moment().unix(),
+                    completedAt: null
                 }
             ]
         })
@@ -43,6 +46,7 @@ export default class TodoApp extends React.Component{
         const updatedTodos = this.state.todos.map((todo)=>{
             if(todo.id === id){
                 todo.completed = !todo.completed;
+                todo.completedAt = todo.completed ? moment().unix() : null;
             }
             return todo;
         });
