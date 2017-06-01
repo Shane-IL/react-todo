@@ -21,5 +21,13 @@ describe('TodoList', ()=>{
         const todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
         expect(todosComponents.length).toBe(todos.length);
+    });
+
+    it('should render empty message if no todos', ()=>{
+        const todos =[];
+        const todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+        const $element = $(ReactDOM.findDOMNode(todoList));
+
+        expect($element.find('.container__message').length).toBe(1);
     })
 });

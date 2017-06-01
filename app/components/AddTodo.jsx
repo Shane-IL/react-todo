@@ -15,7 +15,7 @@ export default class AddTodo extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="container__footer">
                 <form ref="form" onSubmit={(e) => this.onSubmit(e)}>
                     <input type="text" ref="todoText" placeholder="What do you need to do?"/>
                     <button className="button expanded">Add Task</button>
