@@ -61,5 +61,25 @@ describe('Reducers', ()=>{
             expect(response[0].completed).toEqual(true);
 
         });
+
+        it('should add existing todos', () => {
+            const todos = [{
+                id:'111',
+                text: 'Walk the dinosaur',
+                completed: false,
+                completedAt: undefined,
+                createdAt: 33000
+            }];
+
+            const action = {
+                type: "ADD_TODOS",
+                todos
+            };
+
+            const result = reducers.todosReducer(df([]), df(action));
+
+            expect(result.length).toEqual(1);
+            expect(result[0]).toEqual(todos[0]);
+        });
     });
 });

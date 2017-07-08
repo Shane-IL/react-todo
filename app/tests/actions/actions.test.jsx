@@ -24,6 +24,25 @@ describe('Actions', () => {
         expect(response).toEqual(action);
     });
 
+    it('should generate add todos action object', () => {
+        const todos = [{
+            id:'111',
+            text: 'Walk the dinosaur',
+            completed: false,
+            completedAt: undefined,
+            createdAt: 33000
+        }];
+
+        const action = {
+            type: "ADD_TODOS",
+            todos
+        };
+
+        const response = actions.addTodos(todos);
+
+        expect(response).toEqual(action);
+    });
+
     it('should generate show completed action', () => {
         const action = {
             type: "TOGGLE_SHOW_COMPLETED"
