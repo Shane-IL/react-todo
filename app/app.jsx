@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import TodoApp from 'TodoApp';
@@ -12,10 +13,6 @@ store.subscribe(()=>{
     console.log('New State', store.getState());
 });
 
-store.dispatch(actions.addTodo('Walk the dinosaur'));
-store.dispatch(actions.setSearchText('dinosaur'));
-store.dispatch(actions.toggleShowCompleted());
-
 // Load foundation
 $(document).foundation();
 
@@ -23,6 +20,8 @@ $(document).foundation();
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-    <TodoApp/>,
-  document.getElementById('app')
+    <Provider store={store}>
+        <TodoApp/>
+    </Provider>,
+    document.getElementById('app')
 );
