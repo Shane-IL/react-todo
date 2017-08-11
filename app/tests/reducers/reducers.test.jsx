@@ -47,23 +47,31 @@ describe('Reducers', ()=>{
             expect(response[0]).toEqual(action.todo);
         });
 
-        it('should toggle todo', () => {
+        it('should update todo', () => {
+            const todos = [{
+                id: 1,
+                text: "Milk the cows",
+                completed: false,
+                createdAt: moment().unix(),
+                completedAt: null
+            }];
+
+            const updates = {
+                completed: false,
+                completedAt: null
+            }
+
             const action = {
-                type: 'TOGGLE_TODO',
-                id: 1
+                type: 'UPDATE_TODO',
+                id: todos[0].id,
+                updates
             };
 
-            const response = reducers.todosReducer(df([
-                {
-                    id: 1,
-                    text: "Milk the cows",
-                    completed: false,
-                    createdAt: moment().unix(),
-                    completedAt: null
-                }
-            ]), df(action));
+            const response = reducers.todosReducer(df(todos), df(action));
 
-            expect(response[0].completed).toEqual(true);
+            expect(response[0].completed).toEqual(updates.completed);
+            expect(response[0].completedAt).toEqual(updates.completedAt);
+            expect(response[0].text).toEqual(todos[0].text);
 
         });
 
