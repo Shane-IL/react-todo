@@ -83,16 +83,30 @@ describe('Reducers', ()=>{
                 completedAt: undefined,
                 createdAt: 33000
             }];
-
             const action = {
                 type: "ADD_TODOS",
                 todos
             };
-
             const result = reducers.todosReducer(df([]), df(action));
 
             expect(result.length).toEqual(1);
             expect(result[0]).toEqual(todos[0]);
+        });
+
+        it('should remove all todos from store on LOGOUT', () => {
+            const todos = [{
+                id:'111',
+                text: 'Walk the dinosaur',
+                completed: false,
+                completedAt: undefined,
+                createdAt: 33000
+            }];
+            const action = {
+                type: "LOGOUT"
+            };
+            const result = reducers.todosReducer(df(todos), df(action));
+
+            expect(result.length).toEqual(0);
         });
     });
 
