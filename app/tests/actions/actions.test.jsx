@@ -8,6 +8,25 @@ import * as actions from 'actions';
 const createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
+    it('should generate login action', () => {
+        const action = {
+            type: "LOGIN",
+            uid: "abc123"
+        }
+
+        const response = actions.login(action.uid);
+        expect(response).toEqual(action);
+    });
+
+    it('should generate logout action', () => {
+        const action = {
+            type: "LOGOUT"
+        }
+
+        const response = actions.logout();
+        expect(response).toEqual(action);
+    });
+
     it('should generate search text actions', () => {
         const action = {
             type: "SET_SEARCH_TEXT",

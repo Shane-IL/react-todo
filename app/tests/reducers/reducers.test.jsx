@@ -95,4 +95,32 @@ describe('Reducers', ()=>{
             expect(result[0]).toEqual(todos[0]);
         });
     });
+
+    describe('Auth Reducer', () => {
+        it('should add uid to state on LOGIN', () => {
+            const action = {
+                type: "LOGIN",
+                uid: "abc123"
+            };
+
+            const res = reducers.authReducer(null, df(action));
+
+            expect(res).toEqual({
+                uid: action.uid
+            });
+        });
+
+        it('should wipe auth state obj on logout', () => {
+            const authData = {
+                uid: 'abc123'
+            };
+            const action = {
+                type: "LOGOUT"
+            };
+
+            const res = reducers.authReducer(df(authData), df(action));
+
+            expect(res).toEqual({});
+        });
+    });
 });

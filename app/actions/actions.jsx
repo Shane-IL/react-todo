@@ -2,6 +2,19 @@ import moment from 'moment';
 
 import firebase, {firebaseRef, githubProvider} from 'app/firebase/';
 
+export const login = (uid) => {
+    return {
+        type: "LOGIN",
+        uid
+    }
+};
+
+export const logout = () => {
+    return {
+        type: "LOGOUT"
+    }
+};
+
 export const setSearchText = (searchText) => {
     return {
         type: "SET_SEARCH_TEXT",
