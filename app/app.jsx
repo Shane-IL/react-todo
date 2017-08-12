@@ -5,6 +5,7 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import TodoApp from 'TodoApp';
 import TodoAPI from 'TodoAPI';
+import Login from 'Login';
 import * as actions from 'actions';
 import * as configureStoreModule from 'configureStore';
 
@@ -20,7 +21,12 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
     <Provider store={store}>
-        <TodoApp/>
+        <Router history={hashHistory}>
+            <Route path="/">
+                <Route path="todo" component={TodoApp}/>
+                <IndexRoute component={Login}/>
+            </Route>
+        </Router>
     </Provider>,
     document.getElementById('app')
 );

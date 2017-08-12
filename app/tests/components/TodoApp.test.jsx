@@ -6,7 +6,7 @@ import $ from 'jQuery';
 import TestUtils from 'react-dom/test-utils';
 
 import * as configureStore from 'configureStore';
-import TodoApp from 'TodoApp';
+import {TodoApp} from 'TodoApp';
 import TodoList from 'TodoList';
 
 describe('TodoApp', ()=>{
