@@ -11,7 +11,8 @@ import * as configureStoreModule from 'configureStore';
 firebase.auth().onAuthStateChanged((user)=>{
     if(user){
         store.dispatch(actions.login(user.uid));
-        hashHistory.push('/todos')
+        store.dispatch(actions.startAddTodos());
+        hashHistory.push('/todos');
     }
     else{
         store.dispatch(actions.logout());
@@ -20,8 +21,6 @@ firebase.auth().onAuthStateChanged((user)=>{
 });
 
 const store = configureStoreModule.configure();
-
-store.dispatch(actions.startAddTodos());
 
 // Load foundation
 $(document).foundation();
